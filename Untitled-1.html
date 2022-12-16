@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+function initialize(){
+    form = document.getElementById("diceSelection")
+}
+var dice1 = [];
+var dice2 = [];
+var dice3 = [];
+
+function roll(){
+    var numDice = form.diceRoll.value
+    var numberRolls = form.numRolls.value
+    oneDiceRolled(dice1, numberRolls)
+    for(let i = 0; i < dice1.length; i++){
+        console.log(dice1[i])
+    }
+}
+
+function diceRoll(){
+    return Math.floor(Math.random() * 6) + 1;
+}
+
+function oneDiceRolled(array, rollAmount){
+    for(let i = 1; i <= rollAmount; i++){
+        var rollVal = diceRoll()
+        array.push(rollVal)
+    }
+}
+</script>
+<body onload="initialize()">
+    <form id = "diceSelection">
+        Number of Dices<br>
+       <input type = "radio" id="one" name="diceRoll" value="1">
+       <label for="one">1</label><br>
+       <input type = "radio" id="two" name="diceRoll" value="2">
+        <label for="two">2</label><br>
+        <input type = "radio" id="three" name="diceRoll" value="3">
+        <label for="three">3</label><br>
+        Number of Rolls <input type= "number" id="numRolls"><br>
+    </form>
+    <button onclick="roll();">Roll Dice</button>
+
+</body>
+</html>
