@@ -13,23 +13,20 @@ function initialize(){
 var dice1 = [];
 var dice2 = [];
 var dice3 = [];
+var diceArrays = [dice1, dice2, dice3];
 
 function roll(){
     var numDice = form.diceRoll.value
     var numberRolls = form.numRolls.value
-    oneDiceRolled(dice1, numberRolls)
-    for(let i = 0; i < dice1.length; i++){
-        console.log(dice1[i])
+
+    for(let i = 0; i < numDice ; i++){
+        var array = diceArrays[i]
+        oneDiceRolled(array, numberRolls)
     }
 }
-
-function diceRoll(){
-    return Math.floor(Math.random() * 6) + 1;
-}
-
 function oneDiceRolled(array, rollAmount){
     for(let i = 1; i <= rollAmount; i++){
-        var rollVal = diceRoll()
+        var rollVal = Math.floor(Math.random() * 6) + 1;
         array.push(rollVal)
     }
 }
