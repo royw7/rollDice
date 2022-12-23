@@ -10,7 +10,7 @@
 function initialize(){
     form = document.getElementById("diceSelection")
     dicetable = document.getElementById("diceTable")
-    info = document.getElementById("Info")
+    infoDisplay = document.getElementById("Infodisplay")
 }
 var dice1 = [];
 var dice2 = [];
@@ -44,15 +44,19 @@ function roll(){
         }
         totalDice.push(totalRolled)
    }
+
+   console.log(totalDice)
    
 
    totalDice.sort()
  
    var total = 0
+   var average = 0
    for(let i = 0; i < totalDice.length; i++){
     total += totalDice[i]
    }
-   console.log("average" + (total/numberRolls))
+   average = total/numberRolls
+   console.log("average" + (average))
    var half = totalDice.length/2
    var median
    if(totalDice.length % 2 === 0){
@@ -120,8 +124,36 @@ for(let i = 0; i < diceArrays[0].length; i++){
             }
         }
 }
-       
 
+
+
+infoDisplay.innerHTML = "Median: " + median + " Mean: " + average + " Mode: " + freqNum + "<p></p>" + " Frequency of Numbers: "
+
+for (const num of totalDice) {
+  infoDisplay.innerHTML += num + ": " + freq[num] + ", "
+}
+
+var numSame = 0
+
+for(let i=0; i < dice1.length; i++){
+    if(numDice == 2){
+        if(dice1[i] == dice2[i]){
+            numSame += 1;
+        }
+    }else if(numDice == 3){
+        if(dice1[i] == dice2[i] && dice1[i] == dice3[i]){
+            console.log(dice1[i] + "." + dice2[i] + "." + dice3[i])
+            numSame += 1
+        }
+    }
+}
+
+if(numDice ==2){
+    infoDisplay.innerHTML += "<p></p> Number of Doubles: " + numSame
+}
+if(numDice ==3){
+    infoDisplay.innerHTML += "<p></p> Number of triples: " + numSame
+}
 
 }
 function oneDiceRolled(array, rollAmount){
@@ -147,7 +179,7 @@ function oneDiceRolled(array, rollAmount){
     <table id="diceTable">
     </table>
 
-    <div id="info">
+    <div id="Infodisplay">
 
     </div>
 </body>
